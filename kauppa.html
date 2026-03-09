@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kallen kalakauppa</title>
+  <!-- Ulkoinen tyyli + cache-buster -->
+  <link rel="stylesheet" href="./tyylit.css?v=13" />
+
+  <!-- Sivukohtaiset tyylit (vain kauppa-sivun ruudukolle/korteille) -->
+  <style>
+    :root{
+      --gap: 20px;
+      --radius: 12px;
+    }
+    /* Avaus-teksti */
+    .shop-intro{
+      text-align:center;
+      margin: 10px auto 24px;
+      max-width: 60ch;
+      color: var(--text);
+      font-weight: 700;
+    }
+    .shop-intro em{ color: var(--accent); font-style: normal; }
+
+    /* Tuoteruudukko – mobiili 1, tabletti 2, desktop 4 */
+    .product-grid{
+      display:grid;
+      grid-template-columns: 1fr;         /* mobiili */
+      gap: var(--gap);
+      margin: 0 auto 48px;
+      width: min(100% - 2rem, 1200px);
+    }
+    @media (min-width: 768px){
+      .product-grid{ grid-template-columns: repeat(2, 1fr); }  /* tabletti */
+    }
+    @media (min-width: 1024px){
+      .product-grid{ grid-template-columns: repeat(4, 1fr); }  /* desktop */
+    }
+
+    /* Tuotekortti */
+    .product-card{
+      background:#fff;
+      border-radius: var(--radius);
+      box-shadow: 0 10px 24px rgba(0,0,0,.07);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .product-card:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 16px 36px rgba(0,0,0,.10);
+    }
+    .product-card figure{ margin:0; }
+    .product-card img{
+      display:block; width:100%; height:200px; object-fit:cover;
+      background: linear-gradient(180deg, #f7fefe, #e6fbfb);
+    }
+    .product-card .content{
+      padding: 14px 14px 16px;
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .product-card h3{
+      margin:0; font-size:1.15rem; font-weight:800; letter-spacing:.3px; color: var(--text);
+      text-align:center;
+    }
+    .product-meta{
+      display:grid; row-gap:6px; font-size:.95rem;
+    }
+    .product-meta span{ display:flex; align-items:center; gap:8px; }
+    .dot{ width:8px; height:8px; border-radius:50%; background: var(--accent); display:inline-block; }
+
+    /* Hinta-badge */
+    .price{
+      align-self:center;
+      margin-top:6px;
+      background: var(--text); color:#fff; font-weight:800;
+      padding: 6px 12px; border-radius: 999px; letter-spacing:.3px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header container">
+    <!-- Logo keskitettynä -->
+    <a href="index.html" class="brand" aria-label="Etusivu">
+      <img src="KallenkalakauppaLogo.png" alt="Kallen kalakauppa" />
+    </a>
+
+    <!-- Burger (näkyy vain mobiilissa) -->
+    <button class="burger" aria-label="Avaa valikko" aria-controls="paanav" aria-expanded="false">
+      <!-- Inline-SVG: ei rikkoudu poluista -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+           viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M3 6H21M3 12H21M3 18H21"
+              stroke="#0C3806" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+      </svg>
+    </button>
+
+    <!-- Päänavigaatio: MOBIILISSA piilossa, aukeaa burgerista.
+         TABLET/DESKTOP: PIILOSSA kokonaan (laatikot toimivat navi­gaationa) -->
+    <nav id="paanav" class="nav" aria-label="Päänavigaatio">
+      <ul>
+        <li><a href="info.html">Meistä</a></li>
+        <li><a href="kauppa.html">Kauppa</a></li>
+        <li><a href="yhteystiedot.html">Yhteystiedot</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== LINKKIBOXIT (AINOA sisäinen navigaatio tablet/desktopissa) ===== -->
+  <section class="links container" aria-label="Pikalinkit">
+    <a class="box" href="info.html">Meistä</a>
+    <a class="box" href="kauppa.html">Kauppa</a>
+    <a class="box" href="yhteystiedot.html">Yhteystiedot</a>
+  </section>
+
+  <!-- ===== SISÄLTÖ ===== -->
+  <main class="content container" role="main">
+    <!-- Tuotetiedot otsikko  -->
+    <p class="shop-intro">
+      <em>Kallen valikoimassa tarjolla tänään:</em> 
+     <p> Hauki, kuha, ahven ja talven erikoisuus made.</p>
+      Suoraan Pohjois‑Karjalan suurilta järviltä, tuoreena tilauksesta.
+    </p>
+<h2>Tilaukset tällä hetkellä vain puhelimitse!</h2>
+
+    <!-- Tuotekortit -->
+    <section class="product-grid" aria-label="Tuotevalikoima">
+
+      <!-- HAUki -->
+      <article class="product-card" aria-label="Hauki">
+        <figure>
+          <img src="hauki.png" alt="Hauen kuva – Kallen kalakauppa" />
+        </figure>
+        <div class="content">
+          <h2>Hauki</h2>
+          <div class="product-meta">
+            <span><i class="none"></i>Kalastettu: Pyhäselkä</span>
+            <span><i class="none"></i> Pyyntipäivä: <time datetime="2026-03-08">03.03.2026</time></span>
+            <span class="price">14,90 € / kg</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- KUHA -->
+      <article class="product-card" aria-label="Kuha">
+        <figure>
+          <img src="kuha.png" alt="Kuhan kuva – Kallen kalakauppa" />
+        </figure>
+        <div class="content">
+          <h2>Kuha</h2>
+          <div class="product-meta">
+            <span><i class="none"></i> Kalastettu: Suuri Onkamo</span>
+            <span><i class="none"></i> Pyyntipäivä: <time datetime="2026-03-03">03.03.2026</time></span>
+            <span class="price">29,90 € / kg</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- AHVEN -->
+      <article class="product-card" aria-label="Ahven">
+        <figure>
+          <img src="ahven.png" alt="Ahvenen kuva – Kallen kalakauppa" />
+        </figure>
+        <div class="content">
+          <h2>Ahven</h2>
+          <div class="product-meta">
+            <span><i class="none"></i> Kalastettu: Pielinen</span>
+            <span><i class="none"></i> Pyyntipäivä: <time datetime="2026-03-08">04.03.2026</time></span>
+            <span class="price">29,90 € / kg</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- MADE (kuva lisätään nimellä made.png kun saatavilla) -->
+      <article class="product-card" aria-label="Made">
+        <figure>
+          <img src="made.png" alt="Madeen kuva – Kallen kalakauppa (talvi)" />
+        </figure>
+        <div class="content">
+          <h2>Made</h2>
+          <div class="product-meta">
+            <span><i class="none"></i> Kalastettu: Savonselkä </span>
+            <span><i class="none"></i> Pyyntipäivä: <time datetime="2026-03-03">05.03.2026</time></span>
+            <span class="price">24,90 € / kg</span>
+          </div>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <!-- ===== FOOTER (some-ikonit, skaalautuvat ja keskitetyt) ===== -->
+  <footer class="site-footer" role="contentinfo">
+    <nav class="social-icons container" aria-label="Sosiaalisen median linkit">
+      <a class="social-link" href="https://x.com" target="_blank" rel="noopener" aria-label="X">
+        <img src="x.svg" alt="X" />
+      </a>
+      <a class="social-link" href="https://threads.net" target="_blank" rel="noopener" aria-label="Threads">
+        <img src="threads.svg" alt="Threads" />
+      </a>
+      <a class="social-link" href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+        <img src="instagram.svg" alt="Instagram" />
+      </a>
+      <a class="social-link" href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+        <img src="facebook.svg" alt="Facebook" />
+      </a>
+    </nav>
+  </footer>
+
+  <!-- ===== JS: burger avaa/sulkee valikon MOBIILISSA ===== -->
+  <script>
+    (function () {
+      const burger = document.querySelector('.burger');
+      const nav    = document.getElementById('paanav');
+      if (!burger || !nav) return;
+
+      function toggleNav(force) {
+        const open = (typeof force === 'boolean') ? force : !nav.classList.contains('open');
+        nav.classList.toggle('open', open);
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+
+      burger.addEventListener('click', () => toggleNav());
+
+      // Sulje ESC:llä
+      window.addEventListener('keydown', (e) => { if (e.key === 'Escape') toggleNav(false); });
+
+      // Sulje klikkaamalla ulkopuolelle
+      document.addEventListener('click', (e) => {
+        if (!nav.contains(e.target) && !burger.contains(e.target)) toggleNav(false);
+      });
+
+      // Kun siirrytään tablet/desktopiin, resetoi tila (nav piilossa isolla ruudulla)
+      const mql = window.matchMedia('(min-width: 768px)');
+      function onChange(e){
+        if (e.matches) { nav.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); }
+      }
+      if (mql.addEventListener) mql.addEventListener('change', onChange);
+      else mql.addListener(onChange);
+    })();
+  </script>
+
+</body>
+</html>

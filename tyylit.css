@@ -1,0 +1,438 @@
+/* ===========================
+   FONTIT JA PERUSMUUTTUJAT
+   =========================== */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+:root{
+  --bg: #ECFFFF;      /* tausta */
+  --text: #0C3806;    /* pääteksti */
+  --accent: #690006;  /* korostus */
+  --maxw: 1200px;
+  --gap: 20px;
+  --radius: 10px;
+}
+
+html { font-size: 16px; }
+* { box-sizing: border-box; }
+
+body{
+  margin: 0;
+  font-family: 'Manrope', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Keskityskontti */
+.container{
+  width: min(100% - 2rem, var(--maxw));
+  margin-inline: auto;
+}
+
+/* ===========================
+   HEADER + NAV (MOBIILI ENsin)
+   =========================== */
+.site-header{
+  display: grid;
+  grid-template-columns: 1fr auto;          /* brand | burger */
+  grid-template-areas:
+    "brand burger"
+    "nav   nav";
+  align-items: center;
+  justify-items: center;                     /* keskittää solujen sisällön */
+  gap: 10px 12px;
+  padding: 14px 0;
+  text-align: center;
+}
+
+.brand{
+  grid-area: brand;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand img{
+  height: clamp(60px, 9vw, 140px);
+  width: auto;
+  max-width: 90vw;
+}
+
+.burger{
+  grid-area: burger;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.burger svg, .burger img{
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+
+/* Nav: OLETUKSENA PIILOSSA mobiilissa; näkyy vain .open-luokalla */
+.nav{
+  grid-area: nav;
+  display: none;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+  border-radius: 12px;
+  padding: .4rem;
+}
+.nav.open{ display: block; }
+
+.nav ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column; /* mobiilissa pystylistana */
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.nav a{
+  display: block;
+  padding: .6rem 1rem;
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 999px;
+}
+.nav a:hover{
+  background: rgba(0,0,0,.06);
+}
+
+/* ===========================
+   LINKKIBOXIT
+   =========================== */
+/* Mobiili: laatikot PIILOSSA (käytetään burgeria) */
+.links{
+  display: none;
+}
+
+/* Laatikon ulkoasu (aktiivinen vasta tabletista ylöspäin) */
+.box{
+  background: #fff;
+  padding: 20px;
+  border-radius: var(--radius);
+  box-shadow: 0 6px 16px rgba(0,0,0,.06);
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  text-align: center;
+  transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease;
+}
+.box:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.10);
+}
+
+/* ===========================
+   SISÄLTÖ
+   =========================== */
+.content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;     /* keskitys */
+  gap: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+textarea{
+  width: min(100%, 900px);
+  height: 200px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,.15);
+  outline: none;
+}
+
+/* ===========================
+   FOOTER (pienet, skaalautuvat ikonit – keskitetty)
+   =========================== */
+.site-footer {
+  margin-top: 200px;
+  padding: 18px 0 26px;
+  text-align: center;
+  background: var(--bg);
+
+}
+
+.social-icons{
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: max-content;
+  justify-content: center;  /* keskitys */
+  align-items: center;
+  gap: 10px;
+  margin-inline: auto;
+}
+
+.social-link{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(28px, 6vw, 44px);
+  height: clamp(28px, 6vw, 44px);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 3px 12px rgba(0,0,0,.08);
+  transition: transform .15s ease, box-shadow .15s ease, outline-color .15s ease;
+  color: var(--text); /* jos käytät inline-SVG + currentColor */
+}
+.social-link img, .social-link svg{
+  width: 60%;
+  height: 60%;
+  display: block;
+}
+.social-link:hover, .social-link:focus{
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0,0,0,.12);
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* MEDIA-QUERYT  */
+/* TABLET ≥ 768px:
+   - Burger piiloon
+   - HEADER-NAV PIILOSSA kokonaan (käytetään laatikoita)
+   - Linkkiboksit  päällekkäin*/
+
+
+   /* TABLET ≥ 768px */
+
+@media (min-width: 768px){
+  .burger { display: none; }
+  .nav { display: none !important; }
+
+  .links{
+    display: grid !important;
+    grid-template-columns: 1fr;   /* <-- päällekkäin (yksi sarake) */
+    gap: var(--gap);
+    margin: 40px auto;
+    text-align: center;
+    
+  }
+}
+
+/* DESKTOP ≥ 1024px:
+   - Linkkiboksit 3 sarakkeeksi
+*/
+@media (min-width: 1024px){
+  .links{ grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Hyvin kapeat puhelimet → some-ikonit voivat rivittyä kahteen */
+@media (max-width: 360px){
+  .social-icons{
+    grid-auto-flow: row;
+    grid-template-columns: repeat(2, minmax(28px, 1fr));
+    gap: 10px 14px;
+  }
+}
+
+/* SUURENNETTU JA SKAALAUTUVA LOGO */
+  
+.site-header img {
+  height: 500px;
+  width: auto;
+}
+
+/* Otsikot */
+
+h2 {color: #690006}
+h3 {color: #0C3806}
+h4 {color:#690006}
+h6 {font-size: 8px;}
+
+/* ===== KALLEN TARINA + KUVA ===== */
+.story {
+  padding: 20px 0 32px;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr;    /* mobiili: pinottu */
+  gap: clamp(16px, 3vw, 28px);
+  align-items: center;
+}
+
+/* Tekstilohko */
+.story-text {
+  order: 1;                      /* mobiilissa teksti ensin */
+  text-align: left;
+}
+
+.story-text h2 {
+  color: var(--text);
+  font-weight: 800;
+  margin: 0 0 8px 0;
+}
+
+.story-text p {
+  margin: 0 0 12px 0;
+  line-height: 1.55;
+}
+
+.selling-points {
+  margin: 4px 0 16px 1.2rem;
+  padding: 0;
+}
+.selling-points li {
+  margin-bottom: 6px;
+}
+
+/* Toimintapainike */
+.btn-cta {
+  display: inline-block;
+  background: var(--text);
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease;
+}
+.btn-cta:hover,
+.btn-cta:focus {
+  background: var(--accent);
+  box-shadow: 0 8px 20px rgba(0,0,0,.14);
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Kuvan lohko */
+.story-image {
+  order: 2;                      /* mobiilissa kuva toisena */
+  margin: 0;
+  text-align: center;
+}
+.story-image img {
+  width: 100%;
+  height: auto;
+  max-width: 720px;              /* rajoita leveyttä isoilla näytöillä */
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.06);
+}
+
+/* --- Tablet & Desktop: vierekkäin --- */
+@media (min-width: 768px) {
+  .story-grid {
+    grid-template-columns: 1.1fr 0.9fr; /* teksti hieman leveämpi */
+  }
+  .story-text { order: 1; }
+  .story-image { order: 2; }
+}
+
+/* --- Leveillä näytöillä vielä vähän tilaa ympärille --- */
+@media (min-width: 1200px) {
+  .story { padding: 28px 0 40px; }
+}
+/* ===== KALLEN TARINA + KUVA info.html säädöt ===== */
+.story {
+  padding: 20px 0 32px;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr;                  /* mobiili: pinottu */
+  gap: clamp(16px, 3vw, 28px);
+  align-items: center;                          /* pysty-keskitys */
+  justify-items: center;                        /* vaaka-keskitys (KUVA + TEKSTI) */
+}
+
+/* Tekstilohko */
+.story-text {
+  order: 1;                                     /* mobiilissa teksti ensin */
+  text-align: center;                           /* mobiilissa tekstikin keskelle */
+}
+
+.story-text h2 {
+  color: var(--text);
+  font-weight: 800;
+  margin: 0 0 8px 0;
+}
+
+.story-text p {
+  color: #690006;
+  margin: 0 0 12px 0;
+  line-height: 1.55;
+}
+
+.selling-points {
+  margin: 4px 0 16px 1.2rem;
+  padding: 0;
+  text-align: left;                             /* luettelon kohdat luettaviksi */
+  max-width: 60ch;                              /* rivinpituus hallintaan */
+}
+.selling-points li {
+  margin-bottom: 6px;
+}
+
+/* Toimintapainike */
+.btn-cta {
+  display: inline-block;
+  background: var(--text);
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease;
+}
+.btn-cta:hover,
+.btn-cta:focus {
+  background: var(--accent);
+  box-shadow: 0 8px 20px rgba(0,0,0,.14);
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Kuvan lohko */
+.story-image {
+  order: 2;                                     /* mobiilissa kuva toisena */
+  margin: 0;
+  text-align: center;
+}
+.story-image img {
+  width: 100%;
+  height: auto;
+  max-width: 720px;                             /* rajoita leveyttä isoilla näytöillä */
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.06);
+}
+
+/* --- Tablet & Desktop: vierekkäin ja keskitettynä --- */
+@media (min-width: 768px) {
+  .story-grid {
+    grid-template-columns: 1.1fr 0.9fr;         /* teksti hieman leveämpi */
+    place-items: center;                         /* keskitys molempiin suuntiin */
+  }
+  .story-text { 
+    order: 1; 
+    text-align: left;                            /* parempi luettavuus leveällä */
+    max-width: 60ch; 
+  }
+  .story-image { order: 2; }
+}
+
+/* --- Leveillä näytöillä vielä vähän tilaa ympärille --- */
+@media (min-width: 1200px) {
+  .story { padding: 28px 0 40px; }
+}
