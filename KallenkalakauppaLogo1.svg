@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 820 220"
+     role="img"
+     aria-label="Kallen Kalakauppa logo">
+
+  <g fill="#2f4f2f">
+
+    <!-- KALLEN -->
+    <g transform="translate(40,110) scale(0.95,1)">
+      <path d="M0 -60 h22 l28 36 28 -36 h22 l-38 48 40 52 h-24 l-30 -38 -30 38 h-24 l40 -52 z"/>
+      <path d="M140 -60 h24 v120 h-24 z"/>
+      <path d="M190 -60 h24 v98 h52 v22 h-76 z"/>
+      <path d="M290 -60 h24 v98 h52 v22 h-76 z"/>
+      <path d="M390 -60 h86 v22 h-62 v26 h58 v22 h-58 v28 h64 v22 h-88 z"/>
+      <path d="M510 -60 h22 l58 78 v-78 h24 v120 h-22 l-58 -78 v78 h-24 z"/>
+
+      <!-- A:n piste -->
+      <circle cx="92" cy="-12" r="5"/>
+    </g>
+
+    <!-- KALAKAUPPA -->
+    <g transform="translate(230,175) scale(0.85,1)">
+      <path d="M0 -32 h14 l18 22 18 -22 h14 l-24 28 26 32 h-16 l-18 -22 -18 22 h-16 l26 -32 z"/>
+      <path d="M90 -32 h14 v64 h-14 z"/>
+      <path d="M120 -32 h14 v50 h26 v14 h-40 z"/>
+      <path d="M180 -32 h14 l30 64 h-16 l-6 -14 h-30 l-6 14 h-16 z m8 38 h18 l-9 -22 z"/>
+      <path d="M260 -32 h14 v64 h-14 z"/>
+      <path d="M290 -32 h28 c18 0 30 10 30 26 0 16 -12 26 -30 26 h-14 v12 h-14 z
+               m14 14 v18 h14 c8 0 14 -4 14 -9 0 -6 -6 -9 -14 -9 z"/>
+      <path d="M370 -32 h14 v38 c0 10 6 16 16 16 10 0 16 -6 16 -16 v-38 h14 v40
+               c0 18 -14 28 -30 28 -16 0 -30 -10 -30 -28 z"/>
+      <path d="M460 -32 h14 l18 42 18 -42 h14 l-26 64 h-12 z"/>
+      <path d="M530 -32 h28 c18 0 30 10 30 26 0 16 -12 26 -30 26 h-14 v12 h-14 z
+               m14 14 v18 h14 c8 0 14 -4 14 -9 0 -6 -6 -9 -14 -9 z"/>
+      <path d="M610 -32 h14 l30 64 h-16 l-6 -14 h-30 l-6 14 h-16 z m8 38 h18 l-9 -22 z"/>
+    </g>
+
+  </g>
+</svg>
